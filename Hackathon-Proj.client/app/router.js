@@ -1,6 +1,6 @@
 import { AboutController } from "./controllers/AboutController.js";
 import { HomeController } from "./controllers/HomeController.js";
-import { PostsController } from "./controllers/ProfilesController.js";
+import { PostsController } from "./controllers/PostsController.js";
 
 /**
  * Register your routes for the application here

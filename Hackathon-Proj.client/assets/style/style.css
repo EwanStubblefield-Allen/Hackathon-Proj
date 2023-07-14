@@ -5,29 +5,48 @@
     --basil: #6CA27A;
 }
 
+p {
+    margin: 0;
+}
+
 .marinara-bg {
     background-color: var(--marinara);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .basil-glass {
     background: rgba(108, 162, 122, 0.7);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(7.5px);
-    -webkit-backdrop-filter: blur(7.5px);
-    border: 1px solid rgba(108, 162, 122, 0.58);
+    filter: blur(1.5px);
 }
 
 .img-style {
-    height: 5rem;
-    width: 5rem;
+    height: 3rem;
+    width: 3rem;
     object-fit: cover;
+    object-position: center;
     border-radius: 50%;
 }
 
 .post-style {
-    height: 25rem;
+    height: 12rem;
     width: 15rem;
     object-fit: cover;
-    border-radius: 5%;
+    border-radius: 20px;
+}
+
+.edited {
+    color: gray;
+    font-size: 12;
+}
+
+.category {
+    font-size: 13px;
+}
+
+/* SECTION Pseudo Classes */
+.basil-glass:hover {
+    filter: none;
 }
