@@ -5,10 +5,12 @@
     --basil: #6CA27A;
 }
 
+/* SECTION Element Selectors */
 p {
     margin: 0;
 }
 
+/* SECTION Class Selectors */
 .marinara-bg {
     background-color: var(--marinara);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
@@ -19,7 +21,7 @@ p {
     border-radius: 20px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(7.5px);
-    filter: blur(1.5px);
+    /* filter: blur(1.5px); */
 }
 
 .img-style {
@@ -46,7 +48,7 @@ p {
     font-size: 13px;
 }
 
-/* SECTION Pseudo Classes */
+/* SECTION Pseudo Selectors */
 .basil-glass:hover {
     filter: none;
 }
