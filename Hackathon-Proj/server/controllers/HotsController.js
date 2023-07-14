@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { hotsService } from "../services/HotsService.js";
 import BaseController from "../utils/BaseController.js";
 
@@ -6,13 +7,19 @@ export class HotsController extends BaseController {
   constructor() {
     super('api/hots')
     this.router
-      .post('/:postId/hots', this.createHotByPostId)
+
+      .use(Auth0Provider.getAuthorizedUserInfo)
+      .post('', this.createHotByPostId)
 
   }
 
   async createHotByPostId(req, res, next) {
     try {
+      // const postId = req.params.postId
+
       const hotData = req.body
+
+      hotData.hotterId = req.userInfo.id
 
       const hot = await hotsService.createHotByPostId(hotData)
 

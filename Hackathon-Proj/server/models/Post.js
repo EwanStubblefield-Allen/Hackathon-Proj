@@ -29,3 +29,16 @@ export const PostSchema = new Schema({
   timestamps: true,
   toJSON: { virtuals: true }
 })
+
+PostSchema.virtual('profile', {
+  localField: 'profileId',
+  foreignField: '_id',
+  ref: 'Account'
+})
+
+PostSchema.virtual('hotCount', {
+  localField: '_id',
+  foreignField: 'postId',
+  ref: 'Hot',
+  count: true
+})

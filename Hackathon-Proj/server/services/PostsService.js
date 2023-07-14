@@ -2,7 +2,7 @@ import { dbContext } from "../db/DbContext.js"
 
 class PostsService {
   async getPosts() {
-    const posts = await dbContext.Posts.find()
+    const posts = await dbContext.Posts.find().populate("profile").populate('hotCount')
     return posts
   }
   async getPostsById(postId) {
@@ -10,7 +10,7 @@ class PostsService {
     return post
   }
   async createPost(postData) {
-    const post = await dbContext.Posts.create(postData)
+    const post = (await dbContext.Posts.create(postData)).populate('profile')
     return post
   }
 }

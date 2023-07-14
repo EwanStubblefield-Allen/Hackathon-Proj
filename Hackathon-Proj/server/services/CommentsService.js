@@ -7,8 +7,9 @@ class CommentsService {
     return comments
   }
 
-  async createComment(commentData, postId) {
+  async createComment(commentData) {
     const comment = await dbContext.Comments.create(commentData)
+
     return comment
   }
 
