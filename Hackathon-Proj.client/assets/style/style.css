@@ -1,1 +1,33 @@
 /* BASIC STYLES HERE */
+:root {
+    --marinara: #D52B3B;
+    --cheddar: #F98F4B;
+    --basil: #6CA27A;
+}
+
+.marinara-bg {
+    background-color: var(--marinara);
+}
+
+.basil-glass {
+    background: rgba(108, 162, 122, 0.7);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.5px);
+    -webkit-backdrop-filter: blur(7.5px);
+    border: 1px solid rgba(108, 162, 122, 0.58);
+}
+
+.img-style {
+    height: 5rem;
+    width: 5rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.post-style {
+    height: 25rem;
+    width: 15rem;
+    object-fit: cover;
+    border-radius: 5%;
+}
