@@ -1,6 +1,6 @@
 import { dbContext } from "../db/DbContext.js"
 
-class CommentService {
+class CommentsService {
 
   async getCommentsByPostId(postId) {
     const comments = await dbContext.Comments.find({ postId })
@@ -11,5 +11,9 @@ class CommentService {
     const comment = await dbContext.Comments.create(commentData)
     return comment
   }
+
+  // async deleteComment(commentId) {
+  //   const foundIndex = dbContext.Comments.find(c => c. == commentId)
 }
-export const commentsService = new CommentService()
+
+export const commentsService = new CommentsService()

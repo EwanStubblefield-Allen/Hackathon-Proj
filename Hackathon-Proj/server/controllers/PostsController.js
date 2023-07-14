@@ -2,6 +2,7 @@ import { Auth0Provider } from "@bcwdev/auth0provider";
 import { postsService } from "../services/PostsService.js";
 import BaseController from "../utils/BaseController.js";
 import { commentsService } from "../services/CommentsService.js";
+import { hotsService } from "../services/HotsService.js";
 
 export class PostsController extends BaseController {
   constructor() {
@@ -9,9 +10,10 @@ export class PostsController extends BaseController {
     this.router
       .get('', this.getPosts)
       .get('/:postId', this.getPostsById)
-      .get('/:postId/comments', this.getCommentsByPostId)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('/:postId/comments', this.getCommentsByPostId)
       .post('', this.createPost)
+      .get('/:postId/hots', this.getHotsByPostId)
   }
 
   async getPosts(req, res, next) {
@@ -52,4 +54,18 @@ export class PostsController extends BaseController {
       next(error)
     }
   }
+
+  async getHotsByPostId(req, res, next) {
+    try {
+      const postId = req.params.postId
+
+      const hots = await hotsService.getHotsByCommentId(postId)
+
+      return res.send(hots)
+
+    } catch (error) {
+      next(error);
+    }
+  }
+
 }
