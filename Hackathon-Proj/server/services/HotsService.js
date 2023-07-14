@@ -2,14 +2,14 @@ import { dbContext } from "../db/DbContext.js"
 
 
 class HotsService {
-  async getHotsByCommentId(postId) {
-    const hots = await dbContext.Comments.find({ postId })
+  async getHotsByPostId(postId) {
+    const hots = await dbContext.Posts.find({ postId })
 
     return hots
   }
   async createHotByPostId(hotData) {
 
-    await hotsService.getHotsByCommentId(hotData.commentId)
+    await hotsService.getHotsByPostId(hotData.postId)
 
     const hot = await dbContext.Hots.create(hotData)
 

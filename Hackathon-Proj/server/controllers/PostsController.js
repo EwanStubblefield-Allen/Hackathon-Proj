@@ -10,10 +10,10 @@ export class PostsController extends BaseController {
     this.router
       .get('', this.getPosts)
       .get('/:postId', this.getPostsById)
+      .get('/:postId/hots', this.getHotsByPostId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:postId/comments', this.getCommentsByPostId)
       .post('', this.createPost)
-      .get('/:postId/hots', this.getHotsByPostId)
   }
 
   async getPosts(req, res, next) {
@@ -59,7 +59,7 @@ export class PostsController extends BaseController {
     try {
       const postId = req.params.postId
 
-      const hots = await hotsService.getHotsByCommentId(postId)
+      const hots = await hotsService.getHotsByPostId(postId)
 
       return res.send(hots)
 
