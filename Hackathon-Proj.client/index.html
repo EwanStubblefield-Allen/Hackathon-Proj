@@ -15,7 +15,25 @@
   <title>Hackathon-Proj.client</title>
 </head>
 
-<body>
+<style>
+  body.debug .container,
+  body.debug .container-fluid {
+    outline: 2px double blue;
+    outline-offset: -2px;
+  }
+
+  body.debug .row {
+    outline: 2px dashed red;
+    outline-offset: -2px;
+  }
+
+  body.debug [class*="col-"] {
+    outline: 2px dotted forestgreen;
+    outline-offset: -3px;
+  }
+</style>
+
+<body class="debug">
   <!-- SECTION -->
   <header class="sticky-top">
     <nav class="navbar marinara-bg px-2">
@@ -38,20 +56,6 @@
     <section id="router-view">
       <!-- primary viewport -->
 
-      <!--NOTE off-canvass section-->
-      <section class="container-fluid">
-        <div class="row">
-          <!-- TODO Off Canvas Section -->
-        </div>
-        <!--NOTE end of off canvas section-->
-
-        <!--SECTION Posts-->
-        <div class="row justify-content-center" id="postTemplate">
-
-        </div>
-
-        <!-- NOTE Post Card End -->
-      </section>
 
     </section>
 
@@ -64,6 +68,7 @@
       <p class="mb-0"><small>Made with 🥗 by The Confounded Croutons</small></p>
     </div>
   </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.22/auth0-spa-js.production.js"></script>

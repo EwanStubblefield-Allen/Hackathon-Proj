@@ -1,6 +1,8 @@
 import { AboutController } from "./controllers/AboutController.js";
 import { HomeController } from "./controllers/HomeController.js";
+import { MyPostsController } from "./controllers/MyPostsController.js";
 import { PostsController } from "./controllers/PostsController.js";
+import { PostsView } from "./views/PostsView.js";
 
 /**
  * Register your routes for the application here
@@ -9,8 +11,8 @@ import { PostsController } from "./controllers/PostsController.js";
 export const router = [
   {
     path: '',
-    controller: PostsController,
-    view: ''
+    controller: [PostsController, MyPostsController],
+    view: PostsView
   },
 ]
 
