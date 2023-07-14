@@ -13,6 +13,8 @@ class ObservableAppState extends EventEmitter {
   values = loadState('values', [Value])
   socketData = []
 
+  posts = []
+
   // Used to load initial data
   init() {
 

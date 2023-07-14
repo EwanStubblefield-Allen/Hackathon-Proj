@@ -1,6 +1,6 @@
 import { AboutController } from "./controllers/AboutController.js";
 import { HomeController } from "./controllers/HomeController.js";
-import { ProfilesController } from "./controllers/ProfilesController.js";
+import { PostsController } from "./controllers/ProfilesController.js";
 
 /**
  * Register your routes for the application here
@@ -9,7 +9,7 @@ import { ProfilesController } from "./controllers/ProfilesController.js";
 export const router = [
   {
     path: '',
-    controller: ProfilesController,
+    controller: PostsController,
     view: ''
   },
 ]
