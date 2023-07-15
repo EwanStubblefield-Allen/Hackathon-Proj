@@ -1,3 +1,4 @@
+import { accountHoldersService } from '../services/AccountHoldersService.js'
 import { profileService } from '../services/ProfileService.js'
 import BaseController from '../utils/BaseController'
 
@@ -27,9 +28,11 @@ export class ProfilesController extends BaseController {
       next(error)
     }
   }
-  getPostsByUserId(req, res, next) {
+  async getPostsByUserId(req, res, next) {
     try {
+      const profileId = req.params.profileId
 
+      const posts = await accountHoldersService.getPostsByAuthorId(profileId)
 
       res.send(posts)
     } catch (error) {

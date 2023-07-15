@@ -2,8 +2,9 @@ import { AccountSchema } from '../models/Account'
 import { ValueSchema } from '../models/Value'
 import { PostSchema } from '../models/Post.js';
 import { CommentSchema } from '../models/Comment.js';
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 import { HotSchema } from '../models/Hot.js';
+import { AccountHolderSchema } from '../models/AccountHolder.js';
 
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
@@ -13,6 +14,8 @@ class DbContext {
   Comments = mongoose.model('Comment', CommentSchema);
 
   Hots = mongoose.model('Hot', HotSchema);
+
+  AccountHolder = mongoose.model('AccountHolder', AccountHolderSchema)
 }
 
 export const dbContext = new DbContext()
