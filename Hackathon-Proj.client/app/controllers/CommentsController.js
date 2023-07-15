@@ -7,7 +7,7 @@ export class CommentsConroller {
   constructor() {
     console.log('Comments Controller Loaded')
   }
-
+  // TODO finish need getter
   async getComments() {
     try {
       await commentsService.getComments()

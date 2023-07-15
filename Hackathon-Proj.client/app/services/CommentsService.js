@@ -3,6 +3,7 @@ import { Comment } from "../models/Comment.js"
 import { api } from "./AxiosService.js"
 
 class CommentsService {
+  // TODO finish need getter in server
   async getComments() {
     const res = await api.get(``)
   }

@@ -13,6 +13,7 @@ class PostsService {
     const res = await api.get('api/posts')
     const posts = res.data.map(p => new Post(p))
     AppState.posts = posts
+    console.log(res.data);
   }
   async getPostsByUserId() {
     const res = await api.get(`api/${AppState.account.id}/posts`)
