@@ -2,7 +2,7 @@ import { generateId } from "../utils/generateId.js"
 
 export class Post {
   constructor(data) {
-    this.id = data.id || generateId()
+    this.id = data.id
     this.title = data.title
     this.postImg = data.postImg
     this.description = data.description || ''
@@ -14,7 +14,7 @@ export class Post {
 
   get PostTemplate() {
     return /*HTML*/`
-    <div class="col-10 basil-glass my-3 px-0">
+    <div onclick="app.PostsController.setActivePost('${this.id}')" class="col-10 basil-glass my-3 px-0 selectable" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       <!--NOTE THESE ARE ALL NESTED DIVS  this contains the background color and the hero image, gif-->
       <div class="row pe-3">
         <div class="col-3">
@@ -51,6 +51,27 @@ export class Post {
             <i class="mdi mdi-comment p-2"></i>
           </div>
         </div>
+      </div>
+    </div>`
+  }
+
+  get ActivePostTemplate() {
+    return `
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="staticBackdropLabel">${this.title}</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+      <img class="img-fluid pb-2" src="${this.postImg}"
+        alt="${this.title}">
+      <form onsubmit="app.CommentsConroller.createComments(event)">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Comment" aria-label="Comment"
+            aria-describedby="comment" name="description">
+          <button type="submit" class="input-group-text" id="comment">+</button>
+        </div>
+      </form>
+      <div id="commentsList">
       </div>
     </div>`
   }
