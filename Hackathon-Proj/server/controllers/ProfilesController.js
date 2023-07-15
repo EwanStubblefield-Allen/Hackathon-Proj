@@ -1,4 +1,4 @@
-import { accountHoldersService } from '../services/AccountHoldersService.js'
+import { postsService } from '../services/PostsService.js'
 import { profileService } from '../services/ProfileService.js'
 import BaseController from '../utils/BaseController'
 
@@ -8,7 +8,7 @@ export class ProfilesController extends BaseController {
     this.router
       .get('', this.getProfiles)
       .get('/:id', this.getProfile)
-      .get('/:profileId/posts', this.getPostsByUserId)
+      .get('/:profileId/posts', this.getPostsByAccountId)
   }
 
   async getProfiles(req, res, next) {
@@ -28,11 +28,11 @@ export class ProfilesController extends BaseController {
       next(error)
     }
   }
-  async getPostsByUserId(req, res, next) {
+  async getPostsByAccountId(req, res, next) {
     try {
       const profileId = req.params.profileId
 
-      const posts = await accountHoldersService.getPostsByAuthorId(profileId)
+      const posts = await postsService.getPostsByAccountId(profileId)
 
       res.send(posts)
     } catch (error) {
