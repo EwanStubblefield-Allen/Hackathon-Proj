@@ -69,15 +69,14 @@ export class Post {
     <div class="modal-body">
       <img class="img-fluid pb-2" src="${this.postImg}"
         alt="${this.title}">
-      <form onsubmit="app.CommentsConroller.createComments(event)">
+      <form onsubmit="app.CommentsController.createComments(event)">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Comment" aria-label="Comment"
             aria-describedby="comment" name="description">
           <button type="submit" class="input-group-text" id="comment">+</button>
         </div>
       </form>
-      <div id="commentsList">
-      </div>
+      <div id="commentTemplate"></div>
     </div>`
   }
 }

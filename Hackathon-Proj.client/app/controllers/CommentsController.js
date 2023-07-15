@@ -30,4 +30,15 @@ export class CommentsConroller {
       Pop.error(error.message)
     }
   }
+
+
+  async getCommentsByPostId() {
+    try {
+      await commentsService.getCommentByPostId()
+    } catch (error) {
+      console.log(error);
+      Pop.error(error.message)
+
+    }
+  }
 }

@@ -17,6 +17,13 @@ class CommentsService {
 
     AppState.comments.push(new Comment(res.data))
   }
+  async getCommentByPostId() {
+    const activePost = AppState.activePost
+
+    const res = await api.get(`api/posts/${AppState.activePost.id}/comments`)
+
+    AppState.comments = res.data.map(c => new Comment(res.data.postId))
+  }
 }
 
 export const commentsService = new CommentsService()
