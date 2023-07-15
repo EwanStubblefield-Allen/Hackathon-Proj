@@ -1,14 +1,15 @@
+import { hotsService } from "../services/HotsService.js";
 import { Pop } from "../utils/Pop.js";
 
 export class HotsController {
   constructor() {
-    console.log('hots controller');
+    console.log('hots controller')
   }
 
-  createHotPost(postId) {
+  async createHotPost(postId) {
     try {
 
-      console.log(postId)
+      await hotsService.createHotPost(postId)
     } catch (error) {
       console.log(error)
       Pop.error(error.message)
