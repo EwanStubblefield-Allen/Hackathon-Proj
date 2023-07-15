@@ -11,9 +11,10 @@ export class PostsController extends BaseController {
       .get('', this.getPosts)
       .get('/:postId', this.getPostsById)
       .get('/:postId/hots', this.getHotsByPostId)
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/:postId/comments', this.getCommentsByPostId)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createPost)
+      .delete('/:postId', this.removePost)
   }
 
   async getPosts(req, res, next) {
@@ -34,7 +35,24 @@ export class PostsController extends BaseController {
       next(error);
     }
   }
-
+  async getCommentsByPostId(req, res, next) {
+    try {
+      const postId = req.params.postId
+      const comments = await commentsService.getCommentsByPostId(postId)
+      return res.send(comments)
+    } catch (error) {
+      next(error)
+    }
+  }
+  async getHotsByPostId(req, res, next) {
+    try {
+      const postId = req.params.postId
+      const hots = await hotsService.getHotsByPostId(postId)
+      return res.send(hots)
+    } catch (error) {
+      next(error);
+    }
+  }
   async createPost(req, res, next) {
     try {
       const postData = req.body
@@ -45,24 +63,13 @@ export class PostsController extends BaseController {
       next(error);
     }
   }
-  async getCommentsByPostId(req, res, next) {
+  async removePost(req, res, next) {
     try {
-      const postId = req.params.postId
-      const comments = await commentsService.getCommentsByPostId(postId)
-      return res.send(comments)
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async getHotsByPostId(req, res, next) {
-    try {
-      const postId = req.params.postId
-
-      const hots = await hotsService.getHotsByPostId(postId)
-
-      return res.send(hots)
-
+      const postId = req.params.id
+      req.body.profileId = req.userInfo.id
+      const profileId = req.body.profileId
+      await postsService.removePost(postId, profileId)
+      return res.send('Post Removed')
     } catch (error) {
       next(error);
     }
