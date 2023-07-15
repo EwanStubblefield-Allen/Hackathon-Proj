@@ -6,7 +6,7 @@ export const CommentSchema = new Schema({
   profileId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'profile'
+    ref: 'Profile'
   }
 
 

@@ -30,6 +30,23 @@ class PostsService {
     }
     await postToRemove.remove()
   }
+
+  async editPost(postData, postId, userId) {
+    const originalPost = await this.getPostsById(postId)
+
+    if (originalPost.profileId != userId) {
+      throw new Forbidden(`You are not the owner of ${originalPost.title}`)
+    }
+
+    originalPost.title = postData.title || originalPost.title
+    originalPost.postImg = postData.postImg || originalPost.postImg
+    originalPost.description = postData.description || originalPost.description
+    originalPost.category = postData.category || originalPost.category
+
+    await originalPost.save()
+
+    return originalPost
+  }
 }
 
 export const postsService = new PostsService()

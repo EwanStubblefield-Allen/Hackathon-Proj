@@ -7,8 +7,18 @@ export class HotsController extends BaseController {
   constructor() {
     super('api/hots')
     this.router
+      .get('/:hotId', this.getHotById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createHotByPostId)
+      .delete('/:hotId', this.removeHot)
+  }
+  async getHotById(req, res, next) {
+    try {
+      const hot = await hotsService.getHotsById(req.params.hotId)
+      return res.send(hot)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async createHotByPostId(req, res, next) {
@@ -19,6 +29,21 @@ export class HotsController extends BaseController {
       return res.send(hot)
     } catch (error) {
       next(error);
+    }
+  }
+
+  async removeHot(req, res, next) {
+    try {
+
+      const hotId = req.params.hotId
+
+      const profileId = req.userInfo.id
+
+      await hotsService.removeHot(hotId, profileId)
+
+      return res.send("Hot Deleted")
+    } catch (error) {
+      next(error)
     }
   }
 }
