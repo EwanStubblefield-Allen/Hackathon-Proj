@@ -1,8 +1,16 @@
 export class MyPost {
-  constructor() {
-
+  constructor(data) {
+    this.title = data.title
+    this.postImg = data.postImg
   }
-
+  get MyPostTemplate() {
+    return `
+    <li class="d-flex align-items-center border-top border-dark p-2 selectable">
+      <img class="img-style img-fluid" src="${this.postImg}"
+      alt="${this.title}">
+      <p class="p-3">${this.title}</p>
+    </li>`
+  }
   static get PostForm() {
     return /*html*/`
     <div class="offcanvas-header">
@@ -47,11 +55,7 @@ export class MyPost {
       <div class="offcanvas-body">
       <div>
         <ul id="postList" class="p-0">
-        <li class="d-flex align-items-center border-top border-dark p-2">
-          <img class="img-style img-fluid" src="https://media.giphy.com/media/9fuvOqZ8tbZOU/giphy-downsized-large.gif"
-          alt="">
-          <p class="p-3">Post</p>
-        </li>
+        
         </ul>
       </div>
     </div>`
