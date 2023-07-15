@@ -1,6 +1,6 @@
 export class Comment {
   constructor(data) {
-    this.description = data.discription
+    this.description = data.description
     this.userId = data.userId
     this.postId = data.postId
     this.createdAt = new Date(data.createdAt).toLocaleString()

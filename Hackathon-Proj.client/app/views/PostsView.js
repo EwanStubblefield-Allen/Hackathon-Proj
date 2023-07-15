@@ -13,7 +13,7 @@ export const PostsView = /*HTML*/`
     </div>
   </section>
 
-  // SECTION Offcanvas
+  <!--SECTION Offcanvas-->
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasProfile" aria-labelledby="offcanvasProfileLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasProfileLabel">Profile</h5>
@@ -32,7 +32,7 @@ export const PostsView = /*HTML*/`
     </div>
   </div>
   
-  // SECTION Modal
+  <!--SECTION Modal-->
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="staticBackdropLabel" aria-hidden="true">

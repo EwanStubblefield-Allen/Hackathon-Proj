@@ -1,4 +1,4 @@
-import { CommentsConroller } from "./controllers/CommentsController.js";
+import { CommentsController } from "./controllers/CommentsController.js";
 import { HotsController } from "./controllers/HotsController.js";
 import { MyPostsController } from "./controllers/MyPostsController.js";
 import { PostsController } from "./controllers/PostsController.js";
@@ -11,7 +11,7 @@ import { PostsView } from "./views/PostsView.js";
 export const router = [
   {
     path: '',
-    controller: [PostsController, MyPostsController, CommentsConroller, HotsController],
+    controller: [PostsController, MyPostsController, CommentsController, HotsController],
     view: PostsView
   },
 ]

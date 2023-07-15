@@ -10,11 +10,7 @@ function _drawPosts() {
   setHTML('postTemplate', template)
 }
 
-function _drawComments() {
-  let template = ''
-  AppState.comments.forEach(c => template += c.CommentTemplate)
-  setHTML('commentTemplate', template)
-}
+
 
 
 function _drawActivePosts() {
