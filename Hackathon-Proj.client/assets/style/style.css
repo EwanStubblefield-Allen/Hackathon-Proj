@@ -11,12 +11,19 @@ p {
 }
 
 /* SECTION Class Selectors */
+.backgroundImage {
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .marinara-bg {
   background-color: var(--marinara);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .basil-glass {
+  /* height: 12rem; */
   background: rgba(108, 162, 122, 0.7);
   border-radius: 20px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
@@ -34,7 +41,6 @@ p {
 
 .post-style {
   height: 12rem;
-  width: 15rem;
   object-fit: cover;
   border-radius: 20px;
 }

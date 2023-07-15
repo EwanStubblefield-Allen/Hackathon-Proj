@@ -17,7 +17,6 @@ class HotsService {
   }
   async createHotByPostId(hotData) {
     const hot = await dbContext.Hots.create(hotData)
-    await hot.populate('hotter', 'name picture')
     return hot
   }
   async removeHot(hotId, profileId) {

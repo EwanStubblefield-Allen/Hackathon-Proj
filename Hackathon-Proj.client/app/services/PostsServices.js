@@ -13,8 +13,9 @@ class PostsService {
   }
   async getPosts() {
     const res = await api.get('api/posts')
-    const posts = res.data.map(p => new Post(p))
-    AppState.posts = posts
+    console.log(res.data)
+    AppState.posts = res.data.map(p => new Post(p))
+    console.log(AppState.posts)
   }
   async getPostsByProfileId() {
     const res = await api.get(`api/profiles/${AppState.account?.id}/posts`)
@@ -22,15 +23,14 @@ class PostsService {
     AppState.myPosts = res.data.map(d => new Post(d))
   }
   async createPost(postData) {
-    debugger
     if (!postData.category) {
       postData.category = 'Unknown'
     }
     const res = await api.post('api/posts', postData)
-    console.log(res.data)
-    console.log(new Post(res.data))
-    const newPostData = new Post(res.data)
-    AppState.posts.push(newPostData)
+    const newPostData = res.data
+    newPostData.profileName = AppState.account?.name
+    newPostData.profilePic = AppState.account?.picture
+    AppState.posts.push(new Post(newPostData))
     AppState.emit('posts')
   }
 }

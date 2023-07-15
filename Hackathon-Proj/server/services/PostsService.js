@@ -3,11 +3,11 @@ import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class PostsService {
   async getPosts() {
-    const posts = await dbContext.Posts.find().populate("profile").populate('hotCount').populate('commentCount')
+    const posts = await dbContext.Posts.find().populate("profile").populate('hotCount', 'createdAt').populate('commentCount')
     return posts
   }
   async getPostsById(postId) {
-    const post = await dbContext.Posts.findById(postId).populate('hotCount').populate('commentCount')
+    const post = await dbContext.Posts.findById(postId).populate('hotCount', 'createdAt').populate('commentCount')
     if (!post) {
       throw new BadRequest(`The Post does not exist with the Id: ${postId}`)
     }
@@ -16,13 +16,11 @@ class PostsService {
   async createPost(postData) {
     const post = await dbContext.Posts.create(postData)
     await post.populate('profile')
-    await post.populate('hotCount')
-    await post.populate('commentCount')
     return post
   }
 
   async getPostsByProfileId(profileId) {
-    const posts = await dbContext.Posts.find({ profileId }).populate('hotCount').populate('commentCount')
+    const posts = await dbContext.Posts.find({ profileId }).populate('hotCount', 'createdAt').populate('commentCount')
     return posts
   }
   async removePost(postId, profileId) {

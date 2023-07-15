@@ -17,7 +17,6 @@ export const CommentSchema = new Schema({
     ref: 'Profile'
   }
 
-
 }, {
   timestamps: true,
   toJSON: {
