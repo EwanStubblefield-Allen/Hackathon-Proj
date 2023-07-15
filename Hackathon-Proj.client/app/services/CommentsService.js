@@ -5,7 +5,11 @@ import { api } from "./AxiosService.js"
 class CommentsService {
   // TODO finish need getter in server
   async getComments() {
-    const res = await api.get(``)
+    const res = await api.get(`api/posts/${AppState.activePost.id}/comments`)
+
+    const comments = res.data.map(c => new Comment(c))
+    AppState.comments = comments
+    console.log(res.data);
   }
   async createComments(commentData) {
     const res = await api.post(`api/comments`, commentData)
