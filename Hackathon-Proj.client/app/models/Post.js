@@ -10,6 +10,9 @@ export class Post {
     this.updatedAt = new Date(data.updatedAt).toLocaleString()
     this.createdAt = new Date(data.createdAt).toLocaleString()
     this.profileId = data.profileId
+    this.profileName = data.profile[0].name
+    this.profilePic = data.profile[0].picture
+    this.hotCount = data.hotCount
   }
 
   get PostTemplate() {
@@ -40,13 +43,15 @@ export class Post {
         <!--NOTE this contains the profile name and the profile picture -->
         <div class="d-flex flex-column justify-content-between p-2 col-2">
           <div class="d-flex align-items-center justify-content-end">
-            <p class="p-1">Profile Name</p>
+            <p class="p-1">${this.profileName}</p>
             <img class=" img-fluid img-style"
               src="https://media.giphy.com/media/9fuvOqZ8tbZOU/giphy-downsized-large.gif" alt="Dog">
           </div>
           <div class="d-flex justify-content-end align-items-center">
-            <p>100</p>
-            <i class="mdi mdi-heart p-2"></i>
+          <div onclick="app.HotsController.createHotPost('${this.id}')" class="d-flex align-items-center" >
+            <p>${this.hotCount}</p>
+            <i title="HOTS" class="mdi mdi-fire p-2"></i>
+            </div>
             <p>100</p>
             <i class="mdi mdi-comment p-2"></i>
           </div>
