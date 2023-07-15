@@ -9,6 +9,11 @@ class PostsService {
     const post = await dbContext.Posts.findById(postId)
     return post
   }
+  async getPostsByUserId(userId) {
+    const post = await dbContext.Posts.find({ profileId: userId })
+
+    return post
+  }
   async createPost(postData) {
     const post = (await dbContext.Posts.create(postData)).populate('profile')
     return post

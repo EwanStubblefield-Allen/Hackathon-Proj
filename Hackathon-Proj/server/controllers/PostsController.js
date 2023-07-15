@@ -34,6 +34,20 @@ export class PostsController extends BaseController {
       next(error);
     }
   }
+  async getPostsByUserId(req, res, next) {
+    try {
+
+      const userId = req.params.userId
+
+      const posts = await postsService.getPostsByUserId(userId)
+
+      return res.send(posts)
+    } catch (error) {
+      next(error)
+
+    }
+
+  }
 
   async createPost(req, res, next) {
     try {
