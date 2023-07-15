@@ -3,17 +3,17 @@ import { Schema } from "mongoose";
 export const CommentSchema = new Schema({
   description: { type: String, required: true, maxlength: 20 },
   postId: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
-  accountId: {
+  profileId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Account'
+    ref: 'profile'
   }
 
 
 }, { timestamps: true, toJSON: { virtuals: true } })
 
 CommentSchema.virtual('account', {
-  localField: 'accountId',
+  localField: 'profileId',
   foreignField: '_id',
   justOne: true,
   ref: 'Account'
