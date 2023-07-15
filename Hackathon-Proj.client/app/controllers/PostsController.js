@@ -10,6 +10,8 @@ function _drawPosts() {
   setHTML('postTemplate', template)
 }
 
+
+
 function _drawActivePosts() {
   setHTML('activePost', AppState.activePost.ActivePostTemplate)
 }
