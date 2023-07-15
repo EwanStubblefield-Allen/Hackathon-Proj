@@ -15,11 +15,13 @@ class PostsService {
   }
   async createPost(postData) {
     const post = await dbContext.Posts.create(postData)
-    post.populate('profile')
+    await post.populate('profile')
+    await post.populate('hotCount')
+    await post.populate('commentCount')
     return post
   }
 
-  async getPostsByAccountId(profileId) {
+  async getPostsByProfileId(profileId) {
     const posts = await dbContext.Posts.find({ profileId }).populate('hotCount').populate('commentCount')
     return posts
   }
@@ -30,21 +32,17 @@ class PostsService {
     }
     await postToRemove.remove()
   }
-
   async editPost(postData, postId, userId) {
     const originalPost = await this.getPostsById(postId)
 
     if (originalPost.profileId != userId) {
       throw new Forbidden(`You are not the owner of ${originalPost.title}`)
     }
-
     originalPost.title = postData.title || originalPost.title
     originalPost.postImg = postData.postImg || originalPost.postImg
     originalPost.description = postData.description || originalPost.description
     originalPost.category = postData.category || originalPost.category
-
     await originalPost.save()
-
     return originalPost
   }
 }

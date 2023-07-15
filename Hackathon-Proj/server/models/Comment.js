@@ -1,8 +1,16 @@
 import { Schema } from "mongoose";
 
 export const CommentSchema = new Schema({
-  description: { type: String, required: true, maxlength: 20 },
-  postId: { type: Schema.Types.ObjectId, required: true, ref: 'Post' },
+  description: {
+    type: String,
+    required: true,
+    maxlength: 20
+  },
+  postId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Post'
+  },
   profileId: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -10,7 +18,12 @@ export const CommentSchema = new Schema({
   }
 
 
-}, { timestamps: true, toJSON: { virtuals: true } })
+}, {
+  timestamps: true,
+  toJSON: {
+    virtuals: true
+  }
+})
 
 CommentSchema.virtual('account', {
   localField: 'profileId',

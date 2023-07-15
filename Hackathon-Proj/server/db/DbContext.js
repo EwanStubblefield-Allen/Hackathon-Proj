@@ -8,12 +8,9 @@ import { HotSchema } from '../models/Hot.js';
 class DbContext {
   Values = mongoose.model('Value', ValueSchema);
   Account = mongoose.model('Account', AccountSchema);
-
   Posts = mongoose.model('Post', PostSchema);
   Comments = mongoose.model('Comment', CommentSchema);
-
   Hots = mongoose.model('Hot', HotSchema);
-
 }
 
 export const dbContext = new DbContext()

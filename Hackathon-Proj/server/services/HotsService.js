@@ -13,18 +13,13 @@ class HotsService {
   }
   async getHotsByPostId(postId) {
     const hots = await dbContext.Hots.find({ postId })
-
     return hots
   }
   async createHotByPostId(hotData) {
-
     const hot = await dbContext.Hots.create(hotData)
-
     await hot.populate('hotter', 'name picture')
-
     return hot
   }
-
   async removeHot(hotId, profileId) {
     const hotToRemove = await this.getHotsById(hotId)
     if (hotToRemove.hotterId != profileId) {

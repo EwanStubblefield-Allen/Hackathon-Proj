@@ -2,7 +2,6 @@ import { Auth0Provider } from "@bcwdev/auth0provider";
 import { hotsService } from "../services/HotsService.js";
 import BaseController from "../utils/BaseController.js";
 
-
 export class HotsController extends BaseController {
   constructor() {
     super('api/hots')
@@ -20,7 +19,6 @@ export class HotsController extends BaseController {
       next(error)
     }
   }
-
   async createHotByPostId(req, res, next) {
     try {
       const hotData = req.body
@@ -31,16 +29,11 @@ export class HotsController extends BaseController {
       next(error);
     }
   }
-
   async removeHot(req, res, next) {
     try {
-
       const hotId = req.params.hotId
-
       const profileId = req.userInfo.id
-
       await hotsService.removeHot(hotId, profileId)
-
       return res.send("Hot Deleted")
     } catch (error) {
       next(error)

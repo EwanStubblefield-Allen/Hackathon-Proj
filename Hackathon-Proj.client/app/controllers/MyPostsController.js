@@ -5,6 +5,7 @@ import { setHTML } from "../utils/Writer.js"
 export class MyPostsController {
   constructor() {
     console.log("My Posts Controller Loaded.")
+    this.viewProfile()
   }
   setPostForm() {
     setHTML('offcanvasProfile', MyPost.PostForm)

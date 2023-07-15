@@ -6,26 +6,31 @@ class PostsService {
   setActivePost(postId) {
     const posts = AppState.posts
     const foundPost = posts.find(p => p.id == postId)
+    if (!foundPost) {
+      throw new Error(`The post does not exist with the Id: ${postId}`)
+    }
     AppState.activePost = foundPost
   }
-
   async getPosts() {
     const res = await api.get('api/posts')
     const posts = res.data.map(p => new Post(p))
     AppState.posts = posts
-    console.log(res.data);
   }
-  async getPostsByUserId() {
-    const res = await api.get(`api/${AppState.account.id}/posts`)
-    // TODO Finish Function
+  async getPostsByProfileId() {
+    const res = await api.get(`api/profiles/${AppState.account?.id}/posts`)
+    console.log(res.data)
+    AppState.myPosts = res.data.map(d => new Post(d))
   }
   async createPost(postData) {
-    console.log(postData)
+    debugger
     if (!postData.category) {
       postData.category = 'Unknown'
     }
     const res = await api.post('api/posts', postData)
-    AppState.posts.push(new Post(res.data))
+    console.log(res.data)
+    console.log(new Post(res.data))
+    const newPostData = new Post(res.data)
+    AppState.posts.push(newPostData)
     AppState.emit('posts')
   }
 }

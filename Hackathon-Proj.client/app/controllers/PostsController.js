@@ -9,19 +9,14 @@ function _drawPosts() {
   AppState.posts.forEach(p => template += p.PostTemplate)
   setHTML('postTemplate', template)
 }
-
-
-
-
 function _drawActivePosts() {
-  setHTML('activePost', AppState.activePost.ActivePostTemplate)
-
+  setHTML('activePost', AppState.activePost?.ActivePostTemplate)
 }
 
 export class PostsController {
   constructor() {
     console.log("Profiles Controller Loaded.")
-    this.getPosts()
+    AppState.on('account', this.getPosts)
     AppState.on('posts', _drawPosts)
     AppState.on('activePost', _drawActivePosts)
   }
@@ -33,7 +28,6 @@ export class PostsController {
       Pop.error(error.message)
     }
   }
-
   async getPosts() {
     try {
       await postsService.getPosts()
@@ -44,12 +38,13 @@ export class PostsController {
   }
   async getPostsByUserId() {
     try {
-      await postsService.getPostsByUserId()
+      await postsService.getPostsByProfileId()
     } catch (error) {
       console.log(error)
       Pop.error(error.message)
     }
   }
+  // FIXME Error as virtual is not populating don't know why
   async createPost(event) {
     try {
       event.preventDefault()

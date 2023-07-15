@@ -1,54 +1,60 @@
 /* BASIC STYLES HERE */
 :root {
-    --marinara: #D52B3B;
-    --cheddar: #F98F4B;
-    --basil: #6CA27A;
+  --marinara: #D52B3B;
+  --cheddar: #F98F4B;
+  --basil: #6CA27A;
 }
 
 /* SECTION Element Selectors */
 p {
-    margin: 0;
+  margin: 0;
 }
 
 /* SECTION Class Selectors */
 .marinara-bg {
-    background-color: var(--marinara);
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--marinara);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .basil-glass {
-    background: rgba(108, 162, 122, 0.7);
-    border-radius: 20px;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(7.5px);
-    /* filter: blur(1.5px); */
+  background: rgba(108, 162, 122, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.5px);
+  /* filter: blur(1.5px); */
 }
 
 .img-style {
-    height: 3rem;
-    width: 3rem;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
 }
 
 .post-style {
-    height: 12rem;
-    width: 15rem;
-    object-fit: cover;
-    border-radius: 20px;
+  height: 12rem;
+  width: 15rem;
+  object-fit: cover;
+  border-radius: 20px;
 }
 
 .edited {
-    color: gray;
-    font-size: 12;
+  color: gray;
+  font-size: 12px;
 }
 
 .category {
-    font-size: 13px;
+  font-size: 13px;
+}
+
+.activeImg {
+  height: 75dvh;
+  object-position: center;
+  object-fit: cover;
 }
 
 /* SECTION Pseudo Selectors */
 .basil-glass:hover {
-    filter: none;
+  filter: none;
 }

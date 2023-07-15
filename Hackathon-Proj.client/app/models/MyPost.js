@@ -42,7 +42,9 @@ export class MyPost {
           <option value="Cauliflower">
           <option value="Unknown">
         </datalist>
-        <button type="submit" class="btn btn-danger">Submit</button>
+        <div class="text-end">
+          <button type="submit" class="btn btn-danger mt-3">Submit</button>
+        </div>
       </form>
     </div>`
   }
@@ -55,7 +57,10 @@ export class MyPost {
       <div class="offcanvas-body">
       <div>
         <ul id="postList" class="p-0">
-        
+          <li class="d-flex align-items-center border-top border-dark p-2">
+            <img class="img-style img-fluid" src="https://media.giphy.com/media/9fuvOqZ8tbZOU/giphy-downsized-large.gif" alt="">
+            <p class="p-3">Post</p>
+          </li>
         </ul>
       </div>
     </div>`

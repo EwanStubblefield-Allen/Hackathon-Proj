@@ -9,9 +9,7 @@ export class Comment {
 
   get CommentTemplate() {
     return `
-    <div>${this.description}</div>
-    <div>${this.updatedAt}</div>
-
-    `
+      <div>${this.description}</div>
+      <div>${this.updatedAt}</div>`
   }
 }
