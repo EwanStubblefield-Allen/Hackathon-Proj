@@ -42,3 +42,10 @@ PostSchema.virtual('hotCount', {
   ref: 'Hot',
   count: true
 })
+
+PostSchema.virtual('commentCount', {
+  localField: '_id',
+  foreignField: 'postId',
+  ref: 'Comment',
+  count: true
+})
