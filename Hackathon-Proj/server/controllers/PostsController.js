@@ -16,7 +16,6 @@ export class PostsController extends BaseController {
       .post('', this.createPost)
       .delete('/:postId', this.removePost)
   }
-
   async getPosts(req, res, next) {
     try {
       const posts = await postsService.getPosts()
@@ -25,7 +24,6 @@ export class PostsController extends BaseController {
       next(error);
     }
   }
-
   async getPostsById(req, res, next) {
     try {
       const postId = req.params.postId
@@ -65,9 +63,8 @@ export class PostsController extends BaseController {
   }
   async removePost(req, res, next) {
     try {
-      const postId = req.params.id
-      req.body.profileId = req.userInfo.id
-      const profileId = req.body.profileId
+      const postId = req.params.postId
+      const profileId = req.userInfo.id
       await postsService.removePost(postId, profileId)
       return res.send('Post Removed')
     } catch (error) {

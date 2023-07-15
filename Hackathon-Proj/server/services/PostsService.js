@@ -1,5 +1,5 @@
 import { dbContext } from "../db/DbContext.js"
-import { Forbidden } from "../utils/Errors.js"
+import { BadRequest, Forbidden } from "../utils/Errors.js"
 
 class PostsService {
   async getPosts() {
@@ -8,6 +8,9 @@ class PostsService {
   }
   async getPostsById(postId) {
     const post = await dbContext.Posts.findById(postId).populate('hotCount').populate('commentCount')
+    if (!post) {
+      throw new BadRequest(`The Post does not exist with the Id: ${postId}`)
+    }
     return post
   }
   async createPost(postData) {
@@ -25,7 +28,7 @@ class PostsService {
     if (postToRemove.profileId != profileId) {
       throw new Forbidden(`You are not the owner of ${postToRemove.title}`)
     }
-    await dbContext.Posts.remove()
+    await postToRemove.remove()
   }
 }
 
