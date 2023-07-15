@@ -7,6 +7,7 @@ export class ProfilesController extends BaseController {
     this.router
       .get('', this.getProfiles)
       .get('/:id', this.getProfile)
+      .get('/:profileId/posts', this.getPostsByUserId)
   }
 
   async getProfiles(req, res, next) {
@@ -22,6 +23,15 @@ export class ProfilesController extends BaseController {
     try {
       const profile = await profileService.getProfileById(req.params.id)
       res.send(profile)
+    } catch (error) {
+      next(error)
+    }
+  }
+  getPostsByUserId(req, res, next) {
+    try {
+
+
+      res.send(posts)
     } catch (error) {
       next(error)
     }
