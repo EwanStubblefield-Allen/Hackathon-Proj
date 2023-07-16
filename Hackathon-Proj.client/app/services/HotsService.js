@@ -21,7 +21,11 @@ class HotsService {
       return this.removeHot(foundPost, myHotIndex)
     }
     hots.push({ hotterId: AppState.account?.id })
-    foundPost.hotCount += hots.length
+    if (foundPost.hotCount == hots.length) {
+      return
+    }
+    foundPost.lastHotDate = new Date().valueOf()
+    foundPost.hotCount = hots.length
     AppState.emit('posts')
     await api.post(`api/hots`, { postId: foundPost.id })
   }
@@ -30,7 +34,7 @@ class HotsService {
     const myHot = hots[myHotIndex]
     hots.splice(myHotIndex, 1)
     if (postData.hotCount == hots.length) {
-      return postData.hotCount += hots.length
+      return
     }
     postData.hotCount = hots.length
     AppState.emit('posts')

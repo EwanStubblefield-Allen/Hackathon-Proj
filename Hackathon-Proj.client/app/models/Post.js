@@ -12,8 +12,8 @@ export class Post {
     this.profileId = data.profileId
     this.profileName = data.profile[0].name
     this.profilePic = data.profile[0].picture
-    this.hotCount = data.hotCount ? data.hotCount.length : 0
-    // this.lastHotDate = data.hotCount ? data.hotCount[0].id : 0
+    this.hotCount = data.hots ? data.hots.length : 0
+    this.lastHotDate = data.hotCount ? new Date(data.hotCount[-1].createdAt).valueOf() : 0
     this.commentCount = data.commentCount || 0
   }
   get PostTemplate() {
@@ -32,7 +32,7 @@ export class Post {
                   ${this.computedEdit}
                 </p>
               </div>
-              <div class="d-flex flex-column justify-content-around">
+              <div class="d-flex flex-column justify-content-around text-end">
                 ${this.computedDates}
               </div>
             </div>
@@ -55,10 +55,10 @@ export class Post {
   }
   get computedDates() {
     if (this.createdAt == this.updatedAt) {
-      return `
+      return /*HTML*/`
         <p class="edited">Created At: ${this.createdAt}</p>`
     }
-    return `
+    return /*HTML*/`
       <p class="edited">Created At: ${this.createdAt}</p>
       <p class="edited">Updated At: ${this.updatedAt}</p>`
   }
@@ -66,32 +66,71 @@ export class Post {
     if (this.createdAt == this.updatedAt) {
       return ''
     }
-    return `
+    return /*HTML*/`
       <span class="edited p-1">edited</span>`
   }
   get computedInteraction() {
     if (!AppState.account) {
       return ''
     }
-    return `
+    return /*HTML*/`
     <div onclick="app.HotsController.createHotPost('${this.id}')" class="d-flex align-items-center p-2 selectable">
       <p>${this.hotCount}</p>
       <i title="HOTS" class="mdi mdi-fire ps-2"></i>
     </div>
+
     <div onclick="app.PostsController.setActivePost('${this.id}')" class="d-flex align-items-center p-2 selectable">
       <p>${this.commentCount}</p>
       <i class="mdi mdi-comment ps-2"></i>
     </div>`
   }
   get ActivePostTemplate() {
-    return `
+    return /*HTML*/`
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">${this.title}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="d-flex align-items-center">
+          ${this.computedUpdate}
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
       </div>
+      
       <div class="modal-body">
+        <div class="collapse" id="formCollapse">
+          <div class="card card-body mb-3">
+            <form onsubmit="app.PostsController.updatePost(event)">
+              <label for="title"></label>
+              <input type="text" name="title" id="title" placeholder="Title" minlength="2" maxlength="20" required class="w-100" value="${this.title}">
+
+              <label for="postImg"></label>
+              <input type="url" name="postImg" id="postImg" minlength="2" maxlength="300" placeholder="Media" required class="w-100" value="${this.postImg}">
+
+              <label for="description"></label>
+              <textarea type="text" name="description" id="description" minlength="2" maxlength="100" placeholder="description" class="w-100">${this.description}</textarea>
+
+              <label for="category" class="form-label"></label>
+              <input class="form-control" name="category" list="datalistOptions" id="category" placeholder="Pizza Type" value="${this.category}">
+              <datalist id="datalistOptions">
+                <option value="Flat Bread">
+                <option value="Chicago">
+                <option value="New York">
+                <option value="Stuffed Crust">
+                <option value="Italian">
+                <option value="Thin Crust">
+                <option value="Thick Crust">
+                <option value="Pan">
+                <option value="Cauliflower">
+                <option value="Unknown">
+              </datalist>
+              <div class="text-end">
+                <button type="submit" class="btn btn-danger mt-3">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
         <img class="img-fluid activeImg w-100 pb-2" src="${this.postImg}"
           alt="${this.title}">
+
         <form onsubmit="app.CommentsController.createComment(event)">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Comment" aria-label="Comment"
@@ -99,9 +138,46 @@ export class Post {
             <button type="submit" class="input-group-text" id="comment">+</button>
           </div>
         </form>
+        
         <div id="commentTemplate">
 
         </div>
       </div>`
+  }
+  get computedUpdate() {
+    const account = AppState.account
+    if (!account || account.id != this.profileId) {
+      return ''
+    }
+    return /*HTML*/`
+      <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#formCollapse"
+        aria-expanded="false" aria-controls="formCollapse">
+        <i class="mdi mdi-pencil fs-5"></i>
+      </button>
+      <button type="button" class="btn">
+        <i onclick="app.PostsController.removePost()" class="mdi mdi-delete-empty fs-5"></i>
+      </button>`
+  }
+  get MyPostTemplate() {
+    return /*HTML*/`
+    <li onclick="app.PostsController.setActivePost('${this.id}')" class="d-flex justify-content-between align-items-center border-top border-dark p-2 selectable">
+      <div class="d-flex justify-content-around align-items-center">
+        <img class="img-style img-fluid" src="${this.postImg}"
+        alt="${this.title}">
+        <p class="p-3">${this.title}</p>
+      </div>
+
+      <div class="d-flex justify-content-around align-items-center">
+        <div class="d-flex align-items-center p-2">
+          <p>${this.hotCount}</p>
+          <i title="HOTS" class="mdi mdi-fire ps-2"></i>
+        </div>
+        
+        <div class="d-flex align-items-center p-2">
+          <p>${this.commentCount}</p>
+          <i class="mdi mdi-comment ps-2"></i>
+        </div>
+      </div>
+    </li>`
   }
 }

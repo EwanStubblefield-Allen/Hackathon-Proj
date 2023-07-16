@@ -15,6 +15,7 @@ export class PostsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createPost)
       .delete('/:postId', this.removePost)
+      .delete('/:postId/hots', this.removeHotsByPostId)
       .put('/:postId', this.editPost)
   }
   async getPosts(req, res, next) {
@@ -72,6 +73,17 @@ export class PostsController extends BaseController {
       next(error);
     }
   }
+  async removeHotsByPostId(req, res, next) {
+    try {
+      const postId = req.params.postId
+      const profileId = req.userInfo.id
+      await hotsService.removeHotsByPostId(postId, profileId)
+      return res.send()
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async editPost(req, res, next) {
     try {
       const postData = req.body

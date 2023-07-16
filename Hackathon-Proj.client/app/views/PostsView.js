@@ -8,17 +8,7 @@ export const PostsView = /*HTML*/`
 
   <!--SECTION Offcanvas-->
   <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasProfile" aria-labelledby="offcanvasProfileLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasProfileLabel">Profile</h5>
-      
-    </div>
-    <div class="offcanvas-body">
-      <div>
-        <ul id="postList" class="p-0">
-          
-        </ul>
-      </div>
-    </div>
+    
   </div>
   
   <!--SECTION Modal-->

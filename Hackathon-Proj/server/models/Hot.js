@@ -1,5 +1,10 @@
 import { Schema } from "mongoose"
 export const HotSchema = new Schema({
+  posterId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Account'
+  },
   postId: {
     type: Schema.Types.ObjectId,
     required: true,

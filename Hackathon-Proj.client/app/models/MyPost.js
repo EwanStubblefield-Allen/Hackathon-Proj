@@ -3,19 +3,14 @@ export class MyPost {
     this.title = data.title
     this.postImg = data.postImg
   }
-  get MyPostTemplate() {
-    return `
-    <li class="d-flex align-items-center border-top border-dark p-2 selectable">
-      <img class="img-style img-fluid" src="${this.postImg}"
-      alt="${this.title}">
-      <p class="p-3">${this.title}</p>
-    </li>`
-  }
   static get PostForm() {
     return /*html*/`
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasProfileLabel">Make a Post!</h5>
-      <button type="button" class="btn btn-primary" onclick="app.MyPostsController.viewProfile()">View Profile</button>
+      <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-primary" onclick="app.MyPostsController.viewProfile()">View Profile</button>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
     </div>
     <div class="offcanvas-body">
       <form onsubmit="app.PostsController.createPost(event)">
@@ -52,15 +47,15 @@ export class MyPost {
     return /*html*/`
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasProfileLabel">Profile</h5>
-      <button type="button" class="btn btn-primary" onclick="app.MyPostsController.setPostForm()">Create New Post</button>
+      <div class="d-flex align-items-center">
+        <button type="button" class="btn btn-primary" onclick="app.MyPostsController.setPostForm()">Create New Post</button>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
       </div>
       <div class="offcanvas-body">
       <div>
         <ul id="postList" class="p-0">
-          <li class="d-flex align-items-center border-top border-dark p-2">
-            <img class="img-style img-fluid" src="https://media.giphy.com/media/9fuvOqZ8tbZOU/giphy-downsized-large.gif" alt="">
-            <p class="p-3">Post</p>
-          </li>
+          
         </ul>
       </div>
     </div>`

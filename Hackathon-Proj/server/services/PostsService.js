@@ -1,13 +1,14 @@
 import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
+import { hotsService } from "./HotsService.js"
 
 class PostsService {
   async getPosts() {
-    const posts = await dbContext.Posts.find().populate("profile").populate('hotCount', 'createdAt').populate('commentCount')
+    const posts = await dbContext.Posts.find().populate("profile", 'name picture').populate('hots', 'createdAt').populate('commentCount')
     return posts
   }
   async getPostsById(postId) {
-    const post = await dbContext.Posts.findById(postId).populate('hotCount', 'createdAt').populate('commentCount')
+    const post = await dbContext.Posts.findById(postId).populate("profile", 'name picture').populate('hots', 'createdAt').populate('commentCount')
     if (!post) {
       throw new BadRequest(`The Post does not exist with the Id: ${postId}`)
     }
@@ -20,13 +21,17 @@ class PostsService {
   }
 
   async getPostsByProfileId(profileId) {
-    const posts = await dbContext.Posts.find({ profileId }).populate('hotCount', 'createdAt').populate('commentCount')
+    const posts = await dbContext.Posts.find({ profileId }).populate("profile", 'name picture').populate('hots', 'createdAt').populate('commentCount')
     return posts
   }
   async removePost(postId, profileId) {
     const postToRemove = await this.getPostsById(postId)
     if (postToRemove.profileId != profileId) {
       throw new Forbidden(`You are not the owner of ${postToRemove.title}`)
+    }
+    const hots = await hotsService.getHotsByPostId(postId)
+    if (hots[0]) {
+      await hotsService.removeHotsByPostId(postId, profileId)
     }
     await postToRemove.remove()
   }

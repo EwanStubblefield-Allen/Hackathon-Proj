@@ -36,7 +36,7 @@ PostSchema.virtual('profile', {
   ref: 'Account'
 })
 
-PostSchema.virtual('hotCount', {
+PostSchema.virtual('hots', {
   localField: '_id',
   foreignField: 'postId',
   ref: 'Hot',

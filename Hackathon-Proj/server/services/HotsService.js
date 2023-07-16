@@ -12,10 +12,12 @@ class HotsService {
     return hot
   }
   async getHotsByPostId(postId) {
-    const hots = await dbContext.Hots.find({ postId })
+    const hots = await dbContext.Hots.find({ postId }).populate('post', 'profileId')
     return hots
   }
   async createHotByPostId(hotData) {
+    const post = await dbContext.Posts.findById(hotData.postId)
+    hotData.posterId = post.profileId
     const hot = await dbContext.Hots.create(hotData)
     return hot
   }
@@ -25,6 +27,13 @@ class HotsService {
       throw new Forbidden(`You are not the owner of hot!`)
     }
     await hotToRemove.remove()
+  }
+  async removeHotsByPostId(postId, profileId) {
+    const hotToRemove = await this.getHotsByPostId(postId)
+    if (hotToRemove[0].posterId != profileId) {
+      throw new Forbidden(`You are not the owner of hot!`)
+    }
+    hotToRemove.forEach(async p => await p.remove())
   }
 }
 
