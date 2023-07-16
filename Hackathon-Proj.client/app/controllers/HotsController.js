@@ -5,9 +5,9 @@ export class HotsController {
   constructor() {
     console.log('Hots Controller Loaded.')
   }
-  async createHotPost(postId) {
+  async checkHotByPost(postId) {
     try {
-      await hotsService.createHotPost(postId)
+      await hotsService.checkHotsByPost(postId)
     } catch (error) {
       console.log(error)
       Pop.error(error.message)

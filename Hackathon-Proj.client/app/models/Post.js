@@ -74,7 +74,7 @@ export class Post {
       return ''
     }
     return /*HTML*/`
-    <div onclick="app.HotsController.createHotPost('${this.id}')" class="d-flex align-items-center p-2 selectable">
+    <div onclick="app.HotsController.checkHotByPost('${this.id}')" class="d-flex align-items-center p-2 selectable">
       <p>${this.hotCount}</p>
       <i title="HOTS" class="mdi mdi-fire ps-2"></i>
     </div>

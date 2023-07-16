@@ -3,12 +3,7 @@ import { api } from "./AxiosService.js"
 
 
 class HotsService {
-  async getHotsByPostId(postId) {
-    const res = await api.get(`api/posts/${postId}/hots`)
-    return res.data
-  }
-  // NOTE This will prevent errors when spamming hots if you have a better way to do it feel free to try
-  async createHotPost(postId) {
+  async checkHotsByPost(postId) {
     const hotsData = await this.getHotsByPostId(postId)
     AppState.hots = hotsData
     const hots = AppState.hots
@@ -20,6 +15,15 @@ class HotsService {
     if (myHotIndex >= 0) {
       return this.removeHot(foundPost, myHotIndex)
     }
+    return this.createHotPost(foundPost)
+  }
+  async getHotsByPostId(postId) {
+    const res = await api.get(`api/posts/${postId}/hots`)
+    return res.data
+  }
+  // NOTE This will prevent errors when spamming hots if you have a better way to do it feel free to try
+  async createHotPost(foundPost) {
+    const hots = AppState.hots
     hots.push({ hotterId: AppState.account?.id })
     if (foundPost.hotCount == hots.length) {
       return
