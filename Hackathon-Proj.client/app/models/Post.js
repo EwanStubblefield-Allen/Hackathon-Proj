@@ -32,12 +32,12 @@ export class Post {
                   ${this.computedEdit}
                 </p>
               </div>
-              <div class="d-flex flex-column justify-content-around text-end">
+              <div class="d-flex flex-column justify-content-around text-md-end">
                 ${this.computedDates}
               </div>
             </div>
             <p class="category">Category: ${this.category}</p>
-            <p>${this.description}</p>
+            <p class="text-break">${this.description}</p>
           </div>
 
           <div class="col-12 col-md-2 d-flex flex-md-column justify-content-between py-2 px-4">
@@ -67,19 +67,19 @@ export class Post {
       return ''
     }
     return /*HTML*/`
-      <span class="edited p-1">edited</span>`
+      <span class="edited p-1">(edited)</span>`
   }
   get computedInteraction() {
     if (!AppState.account) {
       return ''
     }
     return /*HTML*/`
-    <div onclick="app.HotsController.checkHotByPost('${this.id}')" class="d-flex align-items-center p-2 selectable">
+    <div onclick="app.HotsController.checkHotByPost('${this.id}')" class="d-flex align-items-center p-2 selectable" title="That's Hot">
       <p>${this.hotCount}</p>
-      <i title="HOTS" class="mdi mdi-fire ps-2"></i>
+      <i class="mdi mdi-fire ps-2"></i>
     </div>
 
-    <div onclick="app.PostsController.setActivePost('${this.id}')" class="d-flex align-items-center p-2 selectable">
+    <div onclick="app.PostsController.setActivePost('${this.id}')" class="d-flex align-items-center p-2 selectable" title="View Comments">
       <p>${this.commentCount}</p>
       <i class="mdi mdi-comment ps-2"></i>
     </div>`
@@ -90,7 +90,9 @@ export class Post {
         <h1 class="modal-title fs-5" id="staticBackdropLabel">${this.title}</h1>
         <div class="d-flex align-items-center">
           ${this.computedUpdate}
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn text-white" data-bs-dismiss="modal" aria-label="Close" title="Close Post Window">
+            <i class="mdi mdi-window-close fs-5"></i>
+          </button>
         </div>
       </div>
       
@@ -99,13 +101,13 @@ export class Post {
           <div class="card card-body mb-3">
             <form onsubmit="app.PostsController.updatePost(event)">
               <label for="title"></label>
-              <input type="text" name="title" id="title" placeholder="Title" minlength="2" maxlength="20" required class="w-100" value="${this.title}">
+              <input type="text" name="title" id="title" placeholder="Title" minlength="2" maxlength="20" required class="form-control w-100" value="${this.title}">
 
               <label for="postImg"></label>
-              <input type="url" name="postImg" id="postImg" minlength="2" maxlength="300" placeholder="Media" required class="w-100" value="${this.postImg}">
+              <input type="url" name="postImg" id="postImg" minlength="2" maxlength="300" placeholder="Media" required class="form-control w-100" value="${this.postImg}">
 
               <label for="description"></label>
-              <textarea type="text" name="description" id="description" minlength="2" maxlength="100" placeholder="description" class="w-100">${this.description}</textarea>
+              <textarea type="text" name="description" id="description" minlength="2" maxlength="100" placeholder="description" class="form-control w-100">${this.description}</textarea>
 
               <label for="category" class="form-label"></label>
               <input class="form-control" name="category" list="datalistOptions" id="category" placeholder="Pizza Type" value="${this.category}">
@@ -134,8 +136,8 @@ export class Post {
         <form onsubmit="app.CommentsController.createComment(event)">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Comment" aria-label="Comment"
-              aria-describedby="comment" name="description" required>
-            <button type="submit" class="input-group-text" id="comment">+</button>
+              aria-describedby="comment" name="description" maxlength="100" required>
+            <button type="submit" class="input-group-text" id="comment" title="Post Comment">+</button>
           </div>
         </form>
         
@@ -150,12 +152,12 @@ export class Post {
       return ''
     }
     return /*HTML*/`
-      <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#formCollapse"
-        aria-expanded="false" aria-controls="formCollapse">
+      <button class="btn text-white" type="button" data-bs-toggle="collapse" data-bs-target="#formCollapse"
+        aria-expanded="false" aria-controls="formCollapse" title="Edit Post">
         <i class="mdi mdi-pencil fs-5"></i>
       </button>
-      <button type="button" class="btn">
-        <i onclick="app.PostsController.removePost()" class="mdi mdi-delete-empty fs-5"></i>
+      <button onclick="app.PostsController.removePost()"  class="btn text-white" type="button" title="Delete Post">
+        <i class="mdi mdi-delete-empty fs-5"></i>
       </button>`
   }
   get MyPostTemplate() {

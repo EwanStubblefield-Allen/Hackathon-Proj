@@ -80,6 +80,9 @@ export class PostsController {
       event.preventDefault()
       const form = event.target
       await postsService.createPost(getFormData(form))
+      // @ts-ignore
+      bootstrap.Offcanvas.getOrCreateInstance('#offcanvasProfile').hide()
+      window.scrollTo(0, 0)
       form.reset()
     } catch (error) {
       console.log(error)
@@ -93,6 +96,8 @@ export class PostsController {
         return
       }
       await postsService.removePost()
+      // @ts-ignore
+      bootstrap.Modal.getOrCreateInstance('#staticBackdrop').hide()
     } catch (error) {
       console.log(error)
       Pop.error(error.message)

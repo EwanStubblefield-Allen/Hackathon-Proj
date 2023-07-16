@@ -16,9 +16,11 @@ class PostsService {
   }
   async getPosts() {
     const res = await api.get('api/posts')
+    console.log(res.data)
+    res.data.sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
+    console.log(res.data)
     AppState.posts = res.data.map(p => new Post(p))
   }
-  // FIXME Have My posts update when hotCount is changed
   async getPostsByProfileId() {
     const res = await api.get(`api/profiles/${AppState.account?.id}/posts`)
     AppState.myPosts = res.data.map(d => new Post(d))
@@ -32,8 +34,8 @@ class PostsService {
     newPostData.profileName = AppState.account?.name
     newPostData.profilePic = AppState.account?.picture
     const newPost = new Post(newPostData)
-    AppState.posts.push(newPost)
-    AppState.myPosts.push(newPost)
+    AppState.posts.unshift(newPost)
+    AppState.myPosts.unshift(newPost)
     AppState.emit('posts')
   }
   async removePost() {
@@ -46,8 +48,7 @@ class PostsService {
     posts.splice(foundIndex, 1)
     AppState.myPosts.splice(myFoundIndex, 1)
     AppState.emit('posts')
-    // @ts-ignore
-    bootstrap.Modal.getOrCreateInstance('#staticBackdrop').hide()
+    AppState.emit('hots')
   }
   async updatePost(postData) {
     if (!postData.category) {
@@ -60,6 +61,7 @@ class PostsService {
     AppState.activePost = newPostData
     AppState.posts.splice(foundIndex, 1, newPostData)
     AppState.emit('posts')
+    AppState.emit('hots')
   }
 }
 

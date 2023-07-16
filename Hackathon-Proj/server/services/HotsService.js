@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
+import { postsService } from "./PostsService.js"
 
 
 class HotsService {
@@ -16,7 +17,7 @@ class HotsService {
     return hots
   }
   async createHotByPostId(hotData) {
-    const post = await dbContext.Posts.findById(hotData.postId)
+    const post = await postsService.getPostsById(hotData.postId)
     hotData.posterId = post.profileId
     const hot = await dbContext.Hots.create(hotData)
     return hot

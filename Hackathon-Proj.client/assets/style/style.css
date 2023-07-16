@@ -1,8 +1,10 @@
 /* BASIC STYLES HERE */
 :root {
-  --marinara: #D52B3B;
+  --marinara: #d52b3b;
+  --tomato: #660000;
   --cheddar: #F98F4B;
   --basil: #6CA27A;
+  --olive: #3C493C;
 }
 
 /* SECTION Element Selectors */
@@ -19,6 +21,11 @@ p {
 
 .marinara-bg {
   background-color: var(--marinara);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.olive-bg {
+  background-color: var(--olive);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -46,7 +53,7 @@ p {
 }
 
 .edited {
-  color: gray;
+  color: var(--tomato);
   font-size: 12px;
 }
 

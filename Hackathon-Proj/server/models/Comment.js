@@ -4,7 +4,12 @@ export const CommentSchema = new Schema({
   description: {
     type: String,
     required: true,
-    maxlength: 20
+    maxlength: 100
+  },
+  posterId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Account'
   },
   postId: {
     type: Schema.Types.ObjectId,

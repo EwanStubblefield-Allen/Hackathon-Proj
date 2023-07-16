@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
+import { postsService } from "./PostsService.js"
 
 class CommentsService {
   async getCommentsById(commentId) {
@@ -14,6 +15,8 @@ class CommentsService {
     return comments
   }
   async createComment(commentData) {
+    const post = await postsService.getPostsById(commentData.postId)
+    commentData.posterId = post.profileId
     const comment = await dbContext.Comments.create(commentData)
     comment.populate('account', 'name picture')
     return comment
@@ -24,6 +27,13 @@ class CommentsService {
       throw new Forbidden(`You are not the owner of comment!`)
     }
     await commentToRemove.remove()
+  }
+  async removeCommentsByPostId(postId, profileId) {
+    const commentToRemove = await this.getCommentsByPostId(postId)
+    if (commentToRemove[0].posterId != profileId) {
+      throw new Forbidden(`You are not the owner of hot!`)
+    }
+    commentToRemove.forEach(async c => await c.remove())
   }
   async editComment(commentData, commentId, userId) {
     const originalComment = await this.getCommentsById(commentId)

@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
+import { commentsService } from "./CommentsService.js"
 import { hotsService } from "./HotsService.js"
 
 class PostsService {
@@ -32,6 +33,10 @@ class PostsService {
     const hots = await hotsService.getHotsByPostId(postId)
     if (hots[0]) {
       await hotsService.removeHotsByPostId(postId, profileId)
+    }
+    const comments = await commentsService.getCommentsByPostId(postId)
+    if (comments[0]) {
+      await commentsService.removeCommentsByPostId(postId, profileId)
     }
     await postToRemove.remove()
   }

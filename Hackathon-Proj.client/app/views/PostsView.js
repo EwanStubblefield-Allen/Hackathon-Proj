@@ -7,14 +7,14 @@ export const PostsView = /*HTML*/`
   </section>
 
   <!--SECTION Offcanvas-->
-  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasProfile" aria-labelledby="offcanvasProfileLabel">
+  <div class="offcanvas offcanvas-start olive-bg text-white" tabindex="-1" id="offcanvasProfile" aria-labelledby="offcanvasProfileLabel">
     
   </div>
   
   <!--SECTION Modal-->
     <div class="modal fade modal-lg" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div id="activePost" class="modal-content">
+      <div id="activePost" class="modal-content olive-bg text-white">
         
       </div>
     </div>

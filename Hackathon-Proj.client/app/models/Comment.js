@@ -9,7 +9,7 @@ export class Comment {
 
   get CommentTemplate() {
     return `
-      <div>${this.description}</div>
+      <div class="text-break">${this.description}</div>
       <div>${this.updatedAt}</div>`
   }
 }

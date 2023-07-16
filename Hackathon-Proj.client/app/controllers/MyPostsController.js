@@ -1,6 +1,5 @@
 import { AppState } from "../AppState.js"
 import { MyPost } from "../models/MyPost.js"
-import { Pop } from "../utils/Pop.js"
 import { setHTML } from "../utils/Writer.js"
 
 function _drawMyPosts() {
@@ -12,6 +11,11 @@ function _drawMyPosts() {
 export class MyPostsController {
   constructor() {
     console.log("My Posts Controller Loaded.")
+    const myOffcanvas = document.getElementById('offcanvasProfile')
+    myOffcanvas?.addEventListener('hidden.bs.offcanvas', function () {
+      setHTML('offcanvasProfile', MyPost.ProfileView)
+      _drawMyPosts()
+    })
     this.viewProfile()
     AppState.on('myPosts', _drawMyPosts)
   }
