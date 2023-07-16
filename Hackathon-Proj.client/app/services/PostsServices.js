@@ -22,7 +22,6 @@ class PostsService {
   async getPostsByProfileId() {
     const res = await api.get(`api/profiles/${AppState.account?.id}/posts`)
     AppState.myPosts = res.data.map(d => new Post(d))
-    console.log(AppState.myPosts)
   }
   async createPost(postData) {
     if (!postData.category) {

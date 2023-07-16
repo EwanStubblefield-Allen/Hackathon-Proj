@@ -40,9 +40,9 @@ export class PostsController {
     console.log("Profiles Controller Loaded.")
     this.getPosts()
     AppState.on('account', this.getPosts)
-    AppState.on('account', this.getPostsByUserId)
+    AppState.on('account', this.getPostsByProfileId)
     AppState.on('posts', _drawPosts)
-    AppState.on('posts', this.getPostsByUserId)
+    AppState.on('hots', this.getPostsByProfileId)
     AppState.on('activePost', _drawActivePosts)
   }
   setActivePost(postId) {
@@ -64,7 +64,7 @@ export class PostsController {
       Pop.error(error.message)
     }
   }
-  async getPostsByUserId() {
+  async getPostsByProfileId() {
     try {
       if (!AppState.account) {
         return

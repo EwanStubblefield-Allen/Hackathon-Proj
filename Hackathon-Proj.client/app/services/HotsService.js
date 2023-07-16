@@ -6,12 +6,12 @@ class HotsService {
   async checkHotsByPost(postId) {
     const hotsData = await this.getHotsByPostId(postId)
     AppState.hots = hotsData
-    const hots = AppState.hots
     const foundPost = AppState.posts.find(p => p.id == postId)
     if (!foundPost) {
       throw new Error(`The post does not exist with the Id: ${postId}`)
     }
-    const myHotIndex = hots.findIndex(h => AppState.account?.id == h.hotterId)
+    // NOTE Checks if you've already gave post a hot
+    const myHotIndex = AppState.hots.findIndex(h => AppState.account?.id == h.hotterId)
     if (myHotIndex >= 0) {
       return this.removeHot(foundPost, myHotIndex)
     }
@@ -32,17 +32,19 @@ class HotsService {
     foundPost.hotCount = hots.length
     AppState.emit('posts')
     await api.post(`api/hots`, { postId: foundPost.id })
+    AppState.emit('hots')
   }
-  async removeHot(postData, myHotIndex) {
+  async removeHot(foundPost, myHotIndex) {
     const hots = AppState.hots
     const myHot = hots[myHotIndex]
     hots.splice(myHotIndex, 1)
-    if (postData.hotCount == hots.length) {
+    if (foundPost.hotCount == hots.length) {
       return
     }
-    postData.hotCount = hots.length
+    foundPost.hotCount = hots.length
     AppState.emit('posts')
     await api.delete(`api/hots/${myHot.id}`)
+    AppState.emit('hots')
   }
 }
 

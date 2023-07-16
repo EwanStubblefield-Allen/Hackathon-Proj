@@ -17,6 +17,7 @@ class CommentsService {
     AppState.comments.push(new Comment(res.data))
     AppState.emit('activePost')
     AppState.emit('posts')
+    AppState.emit('hots')
   }
 }
 
