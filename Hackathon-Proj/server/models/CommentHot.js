@@ -1,11 +1,6 @@
 import { Schema } from "mongoose";
 
-export const CommentSchema = new Schema({
-  description: {
-    type: String,
-    required: true,
-    maxlength: 100
-  },
+export const CommentHotSchema = new Schema({
   posterId: {
     type: Schema.Types.ObjectId,
     required: true,
@@ -16,12 +11,11 @@ export const CommentSchema = new Schema({
     required: true,
     ref: 'Post'
   },
-  profileId: {
+  hotterId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Profile'
+    ref: 'Account'
   }
-
 }, {
   timestamps: true,
   toJSON: {
@@ -29,23 +23,18 @@ export const CommentSchema = new Schema({
   }
 })
 
-CommentSchema.virtual('profile', {
-  localField: 'profileId',
+CommentHotSchema.index({ postId: 1, hotterId: 1 }, { unique: true })
+
+CommentHotSchema.virtual('hotter', {
+  localField: 'hotterId',
   foreignField: '_id',
   justOne: true,
   ref: 'Account'
 })
 
-CommentSchema.virtual('post', {
+CommentHotSchema.virtual('post', {
   localField: 'postId',
   foreignField: '_id',
   justOne: true,
   ref: 'Post'
-})
-
-CommentSchema.virtual('hotCount', {
-  localField: '_id',
-  foreignField: 'postId',
-  ref: 'CommentHot',
-  count: true
 })
