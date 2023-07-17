@@ -2,9 +2,7 @@ import { dbContext } from "../db/DbContext.js"
 import { BadRequest, Forbidden } from "../utils/Errors.js"
 import { postsService } from "./PostsService.js"
 
-
 class HotsService {
-
   async getHotsById(hotId) {
     const hot = await dbContext.Hots.findById(hotId)
     if (!hot) {

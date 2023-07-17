@@ -15,12 +15,15 @@ class PostsService {
     }
     return post
   }
+  async getPostsByCategory(category) {
+    const posts = await dbContext.Posts.find({ category: category }).populate("profile", 'name picture').populate('hots', 'createdAt').populate('commentCount')
+    return posts
+  }
   async createPost(postData) {
     const post = await dbContext.Posts.create(postData)
     await post.populate('profile', 'name picture')
     return post
   }
-
   async getPostsByProfileId(profileId) {
     const posts = await dbContext.Posts.find({ profileId }).populate("profile", 'name picture').populate('hots', 'createdAt').populate('commentCount')
     return posts

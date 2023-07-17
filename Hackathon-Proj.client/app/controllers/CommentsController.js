@@ -14,6 +14,7 @@ export class CommentsController {
   constructor() {
     console.log('Comments Controller Loaded.')
     AppState.on('activePost', this.getCommentsByPostId)
+    AppState.on('commentHots', _drawComments)
   }
   async getCommentsByPostId() {
     try {
@@ -38,6 +39,20 @@ export class CommentsController {
       formData.postId = AppState.activePost.id
       await commentsService.createComments(formData)
       form.reset()
+    } catch (error) {
+      console.log(error)
+      Pop.error(error.message)
+    }
+  }
+  async removeComment(commentId) {
+    try {
+      const isSure = await Pop.confirm('Are you sure you want to delete this comment')
+      if (!isSure) {
+        return
+      }
+      await commentsService.removeComment(commentId)
+      // @ts-ignore
+      bootstrap.Modal.getOrCreateInstance('#staticBackdrop').hide()
     } catch (error) {
       console.log(error)
       Pop.error(error.message)

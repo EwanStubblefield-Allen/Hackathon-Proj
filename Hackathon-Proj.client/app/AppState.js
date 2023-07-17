@@ -27,6 +27,10 @@ class ObservableAppState extends EventEmitter {
   comments = []
 
   hots = []
+
+  commentHots = []
+
+  sort
   init() {
 
   }

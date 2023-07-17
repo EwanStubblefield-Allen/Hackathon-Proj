@@ -21,7 +21,13 @@ export class PostsController extends BaseController {
   }
   async getPosts(req, res, next) {
     try {
-      const posts = await postsService.getPosts()
+      let category = req.query.Category
+      let posts
+      if (category) {
+        posts = await postsService.getPostsByCategory(category)
+      } else {
+        posts = await postsService.getPosts()
+      }
       return res.send(posts)
     } catch (error) {
       next(error);

@@ -6,10 +6,15 @@ export const CommentHotSchema = new Schema({
     required: true,
     ref: 'Account'
   },
-  postId: {
+  commenterId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Post'
+    ref: 'Account'
+  },
+  commentId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Comment'
   },
   hotterId: {
     type: Schema.Types.ObjectId,
@@ -23,7 +28,7 @@ export const CommentHotSchema = new Schema({
   }
 })
 
-CommentHotSchema.index({ postId: 1, hotterId: 1 }, { unique: true })
+CommentHotSchema.index({ commentId: 1, hotterId: 1 }, { unique: true })
 
 CommentHotSchema.virtual('hotter', {
   localField: 'hotterId',
@@ -32,9 +37,9 @@ CommentHotSchema.virtual('hotter', {
   ref: 'Account'
 })
 
-CommentHotSchema.virtual('post', {
-  localField: 'postId',
+CommentHotSchema.virtual('comment', {
+  localField: 'commentId',
   foreignField: '_id',
   justOne: true,
-  ref: 'Post'
+  ref: 'Comment'
 })
