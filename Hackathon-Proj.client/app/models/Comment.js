@@ -24,7 +24,7 @@ export class Comment {
           </div>
           <p class="edited-marinara">Created At: ${this.createdAt}</p>
         </div>
-        <p class="text-break">${this.description}</p>
+        <p class="text-break text-start pt-3">${this.description}</p>
       </div>
 
       <div class="d-flex flex-column justify-content-between">
