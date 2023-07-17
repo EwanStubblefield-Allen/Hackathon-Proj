@@ -78,6 +78,22 @@ p {
   object-fit: cover;
 }
 
+.ad-btn {
+  color: white;
+  text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.6);
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: #2e7e00;
+  box-shadow: inset -6px -6px 10px 0px #183800, inset 8px 8px 4px 0px #b6e1a1;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.ad-icon {
+  color: #2eb0cb;
+  background-color: gray;
+  height: fit-content;
+}
+
 /* SECTION Pseudo Selectors */
 .basil-glass:hover {
   filter: none;
