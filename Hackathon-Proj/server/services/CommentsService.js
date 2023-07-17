@@ -4,14 +4,14 @@ import { postsService } from "./PostsService.js"
 
 class CommentsService {
   async getCommentsById(commentId) {
-    const comment = await dbContext.Comments.findById(commentId).populate('profile', 'name picture')
+    const comment = await dbContext.Comments.findById(commentId).populate('profile', 'name picture').populate('hotCount')
     if (!comment) {
       throw new BadRequest(`The Comment does not exist with the Id: ${commentId}`)
     }
     return comment
   }
   async getCommentsByPostId(postId) {
-    const comments = await dbContext.Comments.find({ postId }).populate('profile', 'name picture')
+    const comments = await dbContext.Comments.find({ postId }).populate('profile', 'name picture').populate('hotCount')
     return comments
   }
   async createComment(commentData) {

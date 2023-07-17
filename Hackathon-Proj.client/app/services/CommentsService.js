@@ -6,6 +6,7 @@ class CommentsService {
   async getCommentByPostId() {
     const activePost = AppState.activePost
     const res = await api.get(`api/posts/${activePost?.id}/comments`)
+    console.log(res.data)
     AppState.comments = res.data.map(c => new Comment(c))
   }
   async createComments(commentData) {

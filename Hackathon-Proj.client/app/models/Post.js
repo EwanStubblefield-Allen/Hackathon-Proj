@@ -42,7 +42,7 @@ export class Post {
 
           <div class="col-12 col-md-2 d-flex flex-md-column justify-content-between py-2 px-4">
             <div class="d-flex flex-row-reverse flex-md-row align-items-center justify-content-end">
-              <p class="p-1">${this.profileName}</p>
+              <p class="mx-1">${this.profileName}</p>
               <img class=" img-fluid img-style"
                 src="${this.profilePic}" alt="${this.profileName}">
             </div>

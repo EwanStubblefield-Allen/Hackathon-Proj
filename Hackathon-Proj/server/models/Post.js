@@ -39,7 +39,7 @@ PostSchema.virtual('profile', {
 PostSchema.virtual('hots', {
   localField: '_id',
   foreignField: 'postId',
-  ref: 'Hot',
+  ref: 'Hot'
 })
 
 PostSchema.virtual('commentCount', {
