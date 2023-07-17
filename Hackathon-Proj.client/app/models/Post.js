@@ -141,7 +141,7 @@ export class Post {
           </div>
         </form>
         
-        <div id="commentTemplate">
+        <div id="commentTemplate" class="container-fluid">
 
         </div>
       </div>`
@@ -156,7 +156,7 @@ export class Post {
         aria-expanded="false" aria-controls="formCollapse" title="Edit Post">
         <i class="mdi mdi-pencil fs-5"></i>
       </button>
-      <button onclick="app.PostsController.removePost()"  class="btn text-white" type="button" title="Delete Post">
+      <button onclick="app.PostsController.removePost()" class="btn text-white" type="button" title="Delete Post">
         <i class="mdi mdi-delete-empty fs-5"></i>
       </button>`
   }

@@ -29,7 +29,7 @@ export const CommentSchema = new Schema({
   }
 })
 
-CommentSchema.virtual('account', {
+CommentSchema.virtual('profile', {
   localField: 'profileId',
   foreignField: '_id',
   justOne: true,

@@ -30,12 +30,18 @@ p {
 }
 
 .basil-glass {
-  /* height: 12rem; */
   background: rgba(108, 162, 122, 0.7);
   border-radius: 20px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.5px);
   /* filter: blur(1.5px); */
+}
+
+.tomato-glass {
+  background: rgb(102, 0, 0, 0.7);
+  border-radius: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.5px);
 }
 
 .img-style {
@@ -54,6 +60,11 @@ p {
 
 .edited {
   color: var(--tomato);
+  font-size: 12px;
+}
+
+.edited-marinara {
+  color: var(--marinara);
   font-size: 12px;
 }
 

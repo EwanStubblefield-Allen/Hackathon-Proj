@@ -1,8 +1,12 @@
 import { AppState } from "../AppState.js"
+import { Ad } from "../models/Ad.js"
 import { postsService } from "../services/PostsServices.js"
 import { getFormData } from "../utils/FormHandler.js"
 import { Pop } from "../utils/Pop.js"
 import { setHTML } from "../utils/Writer.js"
+
+let randNum = null
+let pageLoaded = false
 
 function _drawProfileAbilities() {
   setHTML('profileInfo', `
@@ -14,7 +18,17 @@ function _drawPosts() {
   _drawBackground()
   let template = ''
   const posts = AppState.posts
-  posts.forEach(p => template += p.PostTemplate)
+  if (!pageLoaded) {
+    randNum = Math.floor(Math.random() * (posts.length - 1))
+    pageLoaded = true
+  }
+  console.log(randNum)
+  for (let i = 0; i < posts.length; i++) {
+    template += posts[i].PostTemplate
+    if (i == randNum) {
+      template += Ad.AdTemplate
+    }
+  }
   setHTML('postTemplate', template)
 }
 function _drawActivePosts() {
