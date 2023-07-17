@@ -35,9 +35,10 @@
           </div>
 
           <form onsubmit="app.PostsController.sortPosts(event)">
-            <label for="category" class="form-label">Sort By:</label>
+            <label for="filter" class="form-label"></label>
             <div class="input-group mb-3">
-              <input class="form-control" name="filter" list="datalistOptions" id="category" required>
+              <input class="form-control" name="filter" list="datalistOptions" id="filter" placeholder="Sort/Filter By:"
+                required>
               <datalist id="datalistOptions">
                 <option value="Hots"></option>
                 <option value="Comments"></option>

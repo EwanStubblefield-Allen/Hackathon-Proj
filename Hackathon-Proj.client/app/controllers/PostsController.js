@@ -9,7 +9,7 @@ let randNum = null
 let pageLoaded = false
 
 function _drawProfileAbilities() {
-  setHTML('profileInfo', `
+  setHTML('profileInfo', /*HTML*/`
     <p class="text-decoration-underline selectable" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasProfile" aria-controls="offcanvasProfile">
       Profile
     </p>`)

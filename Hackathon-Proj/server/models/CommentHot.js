@@ -28,7 +28,7 @@ export const CommentHotSchema = new Schema({
   }
 })
 
-CommentHotSchema.index({ commentId: 1, hotterId: 1 }, { unique: true })
+// CommentHotSchema.index({ commentId: 1, hotterId: 1 }, { unique: true })
 
 CommentHotSchema.virtual('hotter', {
   localField: 'hotterId',

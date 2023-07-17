@@ -17,6 +17,8 @@ class CommentHotsService {
   async createCommentHotByCommentId(commentHotData) {
     const comment = await commentsService.getCommentsById(commentHotData.commentId)
     commentHotData.commenterId = comment.profileId
+    commentHotData.postId = comment.postId
+    commentHotData.posterId = comment.posterId
     const commentHot = await dbContext.CommentHots.create(commentHotData)
     return commentHot
   }
