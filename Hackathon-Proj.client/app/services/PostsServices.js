@@ -10,20 +10,41 @@ class PostsService {
     }
     return foundPost
   }
+  async sortPosts(formData) {
+    if (formData == 'Date Posted') {
+      this.getPosts()
+    } else if (formData == 'Hots' || formData == 'Comments') {
+      this.getPosts()
+      let arr = formData.split('')
+      arr.pop()
+      AppState.sort = arr.join('').toLowerCase()
+      AppState.emit('posts')
+    } else {
+      await this.getPostsByCategory(formData)
+    }
+  }
   setActivePost(postId) {
     const foundIndex = this.getPostIndexById(postId)
     AppState.activePost = AppState.posts[foundIndex]
   }
   async getPosts() {
     const res = await api.get('api/posts')
-    console.log(res.data)
-    res.data.sort((a, b) => new Date(b.createdAt).valueOf() - new Date(a.createdAt).valueOf())
-    console.log(res.data)
+    res.data.sort((a, b) => {
+      let num = new Date(b.updatedAt).valueOf() - new Date(a.updatedAt).valueOf()
+      return num
+    })
     AppState.posts = res.data.map(p => new Post(p))
   }
   async getPostsByProfileId() {
     const res = await api.get(`api/profiles/${AppState.account?.id}/posts`)
     AppState.myPosts = res.data.map(d => new Post(d))
+  }
+  async getPostsByCategory(formData) {
+    let res
+    if (formData != 'date') {
+      res = await api.get(`/api/posts?Category=${formData.replace(' ', '+')}`)
+    }
+    AppState.posts = res.data.map(d => new Post(d))
   }
   async createPost(postData) {
     if (!postData.category) {

@@ -19,7 +19,7 @@ export const CommentSchema = new Schema({
   profileId: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'Profile'
+    ref: 'Account'
   }
 
 }, {
@@ -43,9 +43,9 @@ CommentSchema.virtual('post', {
   ref: 'Post'
 })
 
-CommentSchema.virtual('hotCount', {
+CommentSchema.virtual('commentHotCount', {
   localField: '_id',
-  foreignField: 'postId',
+  foreignField: 'commentId',
   ref: 'CommentHot',
   count: true
 })

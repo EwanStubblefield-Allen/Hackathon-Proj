@@ -1,39 +1,40 @@
 import { Auth0Provider } from "@bcwdev/auth0provider";
 import BaseController from "../utils/BaseController.js";
-import { commenthotsService } from "../services/CommentHotsService.js";
+import { commentHotsService } from "../services/CommentHotsService.js";
 
 export class CommentHotsController extends BaseController {
   constructor() {
-    super('api/commenthots')
-
+    super('api/commentHots')
     this.router
-      .get(':/hotId', this.getHotById)
-
+      .get('/:commentHotId', this.getCommentHotById)
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .post('', this.createHotByCommentId)
+      .post('', this.createCommentHotByCommentId)
+      .delete('/:commentHotId', this.removeCommentHot)
   }
-  async getHotById(req, res, next) {
+  async getCommentHotById(req, res, next) {
     try {
-      const hot = await commenthotsService.getHotById(req.params.hotId)
-
-      return res.send(hot)
-
+      const commentHot = await commentHotsService.getCommentHotsById(req.params.commentHotId)
+      return res.send(commentHot)
     } catch (error) {
       next(error)
     }
-
   }
-
-  async createHotByCommentId(req, res, next) {
+  async createCommentHotByCommentId(req, res, next) {
     try {
-      const hotData = req.body
-
-      hotData.hotterId = req.userInfo.Id
-
-      const hot = await commenthotsService.createHotByCommentId(hotData)
-
-      return res.send(hot)
-
+      const commentHotData = req.body
+      commentHotData.hotterId = req.userInfo.id
+      const commentHot = await commentHotsService.createCommentHotByCommentId(commentHotData)
+      return res.send(commentHot)
+    } catch (error) {
+      next(error);
+    }
+  }
+  async removeCommentHot(req, res, next) {
+    try {
+      const commentHotId = req.params.commentHotId
+      const profileId = req.userInfo.id
+      await commentHotsService.removeCommentHot(commentHotId, profileId)
+      return res.send("Hot Deleted")
     } catch (error) {
       next(error)
     }

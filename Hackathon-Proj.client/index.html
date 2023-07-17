@@ -27,12 +27,38 @@
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div id="profileInfo" class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav px-3">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav d-flex justify-content-between align-items-center px-3 flex-grow-1">
           <!-- NAVLINKS -->
+          <div id="profileInfo">
+
+          </div>
+
+          <form onsubmit="app.PostsController.sortPosts(event)">
+            <label for="category" class="form-label">Sort By:</label>
+            <div class="input-group mb-3">
+              <input class="form-control" name="filter" list="datalistOptions" id="category" required>
+              <datalist id="datalistOptions">
+                <option value="Hots"></option>
+                <option value="Comments"></option>
+                <option value="Date Posted"></option>
+                <option value="Flat Bread">
+                <option value="Chicago">
+                <option value="New York">
+                <option value="Stuffed Crust">
+                <option value="Italian">
+                <option value="Thin Crust">
+                <option value="Thick Crust">
+                <option value="Pan">
+                <option value="Cauliflower">
+                <option value="Unknown">
+              </datalist>
+              <button type="submit" class="input-group-text" id="comment" title="Post Comment">+</button>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="flex-grow-1 justify-content-end align-items-center d-flex" id="authstate"></div>
+      <div class="justify-content-end align-items-center d-flex" id="authstate"></div>
     </nav>
   </header>
 

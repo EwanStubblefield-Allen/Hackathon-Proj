@@ -6,7 +6,6 @@ class CommentsService {
   async getCommentByPostId() {
     const activePost = AppState.activePost
     const res = await api.get(`api/posts/${activePost?.id}/comments`)
-    console.log(res.data)
     AppState.comments = res.data.map(c => new Comment(c))
   }
   async createComments(commentData) {
@@ -19,6 +18,13 @@ class CommentsService {
     AppState.emit('activePost')
     AppState.emit('posts')
     AppState.emit('hots')
+  }
+  async removeComment(commentId) {
+    const comments = AppState.comments
+    const foundIndex = comments.findIndex(c => c.id == commentId)
+    comments.splice(foundIndex, 1)
+    await api.delete(`api/comments/${commentId}`)
+    AppState.emit('account')
   }
 }
 
